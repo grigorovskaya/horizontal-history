@@ -592,6 +592,7 @@ var  getIt = function (event) {
     userText = document.getElementById("categ").value.toLowerCase();
     results = sort(search(userText));
     render(results);
+    document.getElementById("categ").value = "";
   };
 
 var each = function(collection, callback) {
@@ -656,6 +657,10 @@ var yearSearch = function (input) {
           message.innerHTML = "<p>Sorry, nobody I know was alive during that time.</p>";
           results = list;
         }
+    }
+    else {
+      message.innerHTML = "<p>Sorry, the input is invalid</p>";
+      results = list;
     }
   }
         
