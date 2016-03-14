@@ -115,7 +115,7 @@ body {
 
   <div id="search">
   <form>
-    Search: <input type="text" id="categ" onkeydown = "if( event.keyCode == 10 || event.keyCode == 13) handleKeyPress()"></input>
+    Search: <input type="text" id="categ"></input>
     <button type="button" class="button" id="button">Go</button><br>
     <span id="example">examples:  -500, Vasco da Gama, 1870 - 1876</span>
   </form>
@@ -623,13 +623,6 @@ each(list, function(x){
      }
  }); 
 
-var handleKeyPress = function () {
-  event.preventDefault();
-  userText = document.getElementById("categ").value.toLowerCase();
-  results = sort(search(userText));
-  render(results);
-};
-
 var yearsRange = function (input) {
         var newArr1 = input.split(" ");
         var newArr2 = [];
@@ -920,6 +913,15 @@ var legendStyling = function () {
 
 results = sort(list);
 render(results);
+document.getElementById("categ").addEventListener("keypress", function(event) {
+  event = event; 
+  if( event.keyCode == 10 || event.keyCode == 13) {
+    event.preventDefault();
+    document.getElementById("button").click(); 
+    return false;
+  } 
+  return true;
+});
 document.getElementById("button").addEventListener("click", getIt);
 
 </script>
