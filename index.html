@@ -911,6 +911,7 @@ var legendStyling = function () {
     temp =  categories.indexOf(block[i].class);
     block[i].style.backgroundColor = colors[temp];
     document.getElementById(block[i].id).addEventListener("click", clicked);
+    document.getElementById(block[i].id).addEventListener("touchend", clicked, false);
   }
  
 };
