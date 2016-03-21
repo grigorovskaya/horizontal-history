@@ -899,7 +899,7 @@ var legendStyling = function () {
   var colors = ["#75d462", "#ffc321", "#e35253", "#17becf", "#afa5f2", "#c49c94", "#bdbdbd"];
 
   var clicked = function(e) {
-    userText = e.path[0].id;
+    userText = e.target.id;
     search(userText);
     render(sort(search(userText)));
     message.innerHTML = "";
