@@ -628,12 +628,9 @@ var yearsRange = function (input) {
         var newArr1 = input.split(" ");
         var newArr2 = [];
         if(newArr1.length > 2) {
-            for(var i=0; i<newArr1.length; i++) {
-                if(!isNaN(newArr1[i])) {
-                    Number(newArr1[i]);
-                    newArr2.push(newArr1[i]);
-                }
-            }
+           newArr2 = filter(newArr1, function(x) {
+            return Number(!isNaN(x));
+           });
         }
         else {
           newArr2 = newArr1;
@@ -719,12 +716,12 @@ var findMinimum = function (array, num) {
     num = num || Infinity;
     var place;
 var min = num;
-for( var i=0; i<array.length; i++){
-  if( min > array[i].born ) {
-      min = array[i].born;
-      place = i;
+  each (array, function (x) {
+  if( min > x.born ) {
+      min = x.born;
+      place = array.indexOf(x);
   }
-}
+})
 return array[place];
 };
 
@@ -892,6 +889,7 @@ var render = function(data) {
   wikiDiv();
       
 };
+
 //creates a legend and makes it work as a category filter
 var legendStyling = function () {
   var block = document.getElementsByClassName("legendList");
@@ -905,16 +903,17 @@ var legendStyling = function () {
     message.innerHTML = "";
   };
 
-  for (var i=0; i<block.length; i++) {
-    block[i].class = block[i].innerHTML;
-    block[i].id = block[i].innerHTML;
-    temp =  categories.indexOf(block[i].class);
-    block[i].style.backgroundColor = colors[temp];
-    document.getElementById(block[i].id).addEventListener("click", clicked);
-  }
- 
-};
 
+  each(block, function(x) { 
+    x.class = x.innerHTML;
+    x.id = x.innerHTML;
+    temp = categories.indexOf(x.id);
+    if (typeof x == "object") {
+      x.style.backgroundColor = colors[temp];
+      document.getElementById(x.id).addEventListener("click", clicked);
+    }
+  });
+};
 
 results = sort(list);
 render(results);
